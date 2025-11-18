@@ -31,8 +31,4 @@ export default {
 }
 </script>
 <style>
-img{
-    width: 150px;
-    height: 150px;
-}
 </style>

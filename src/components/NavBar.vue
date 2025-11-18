@@ -36,6 +36,9 @@
             <li class="nav-item" v-if="status !== false">
               <router-link to="/compras" class="nav-link">Compras</router-link>
             </li>
+            <li class="nav-item" v-if="status !== false">
+              <router-link to="/comprar" class="nav-link">Realizar Compra</router-link>
+            </li>
             <li class="nav-item" v-if="status === false">
               <router-link to="/login" class="nav-link">Login</router-link>
             </li>
