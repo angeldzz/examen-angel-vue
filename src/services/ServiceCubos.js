@@ -43,6 +43,7 @@ export default class ServiceCubos{
     }
     postCompra(token, id){
         return new Promise(function (resolve, reject) {
+            const data = []
             const config = {
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -50,7 +51,7 @@ export default class ServiceCubos{
                 }
             }
             let url = Global.url + "/api/Compra/InsertarPedido/" + id
-            axios.post(url, config).then(response => {
+            axios.post(url, data, config).then(response => {
                 resolve(response)
             }).catch(err => reject(err))
         })
