@@ -25,7 +25,6 @@ export default {
     },
     mounted () {
         service.getCubos().then(response => {
-            console.log(response);
             this.cubos = response;
         })
     },

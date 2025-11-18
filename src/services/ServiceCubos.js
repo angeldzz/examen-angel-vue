@@ -1,6 +1,60 @@
 import axios from "axios"
 import Global from "@/Global"
 export default class ServiceCubos{
+    getToken(user, pass){
+        return new Promise(function(resolve, reject){
+            let url = Global.url + "api/Manage/Login"
+            let data = {
+                    email: user, 
+                    password: pass
+                }
+            axios.post(url, data).then(response => {
+                resolve(response.data.response)
+            }).catch(err => reject(err))
+        })
+    }
+    getPerfil(token){
+        return new Promise(function (resolve, reject) {
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            }
+            let url = Global.url + "api/Manage/PerfilUsuario"
+            axios.get(url, config).then(response => {
+                resolve(response.data)
+            }).catch(err => reject(err))
+        })
+    }
+    getCompras(token){
+        return new Promise(function (resolve, reject) {
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            }
+            let url = Global.url + "/api/Compra/ComprasUsuario"
+            axios.get(url, config).then(response => {
+                resolve(response.data)
+            }).catch(err => reject(err))
+        })
+    }
+    postCompra(token, id){
+        return new Promise(function (resolve, reject) {
+            const config = {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            }
+            let url = Global.url + "/api/Compra/InsertarPedido/" + id
+            axios.post(url, config).then(response => {
+                resolve(response)
+            }).catch(err => reject(err))
+        })
+    }
     getCubos(){
         return new Promise(function (resolve) {
             let url = Global.url + "api/Cubos"

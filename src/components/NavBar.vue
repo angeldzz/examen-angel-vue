@@ -30,6 +30,18 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item" v-if="status !== false">
+              <router-link to="/perfil" class="nav-link">Perfil</router-link>
+            </li>
+            <li class="nav-item" v-if="status !== false">
+              <router-link to="/compras" class="nav-link">Compras</router-link>
+            </li>
+            <li class="nav-item" v-if="status === false">
+              <router-link to="/login" class="nav-link">Login</router-link>
+            </li>
+            <li class="nav-item" v-else>
+              <router-link to="/" class="nav-link" @click="Logout()">Logout</router-link>
+            </li>
           </ul>
         </div>
       </div>
@@ -44,13 +56,23 @@ export default {
     name:"NavBar",
     data() {
         return {
-            marcas: []
+            marcas: [],
+            status: false
         }
     },
     mounted () {
+        if(localStorage.getItem("token") !== null){
+          this.status = true
+        }
         service.getMarcas().then(response => {
             this.marcas = response
         })
+    },
+    methods: {
+      Logout() {
+        localStorage.removeItem("token")
+        window.location.reload()
+      }
     },
 };
 </script>
